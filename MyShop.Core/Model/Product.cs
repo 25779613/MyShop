@@ -22,5 +22,8 @@ namespace MyShop.Core.Model
 
         public string Image { get; set; }
         
+        //under references add caching in the InMemory solution
+        //system.runtime.caching
+        //Add reference to solution that has the model
     }
 }
