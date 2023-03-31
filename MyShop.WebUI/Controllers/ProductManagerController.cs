@@ -12,17 +12,17 @@ namespace MyShop.WebUI.Controllers
     public class ProductManagerController : Controller
     {
         //cache service 
-        ProductRepository context;
-        ProductCategoryRepository catagoryContext;
+        InMemoryRepository<Product> context;
+        InMemoryRepository<ProductCategory> catagoryContext;
 
         public ProductManagerController() {
             //create cache when called 
-            context = new ProductRepository();
-            catagoryContext = new ProductCategoryRepository();
+            context = new InMemoryRepository<Product>();
+            catagoryContext = new InMemoryRepository<ProductCategory>();
         }
         public ActionResult Index()
         {
-            List<Product> products = context.GetAllProducts().ToList();
+            List<Product> products = context.GetAll().ToList();
             return View(products);
         }
         //Display the page 
@@ -30,7 +30,7 @@ namespace MyShop.WebUI.Controllers
         {
             ProductManagerViewModel viewModel = new ProductManagerViewModel();
             viewModel.Product= new Product();
-            viewModel.ProductCategories = catagoryContext.GetAllproductsCategory();
+            viewModel.ProductCategories = catagoryContext.GetAll();
             return View(viewModel);
         }
         //send the data
@@ -61,7 +61,7 @@ namespace MyShop.WebUI.Controllers
             {
                 ProductManagerViewModel viewModel = new ProductManagerViewModel();
                 viewModel.Product = product;
-                viewModel.ProductCategories = catagoryContext.GetAllproductsCategory();
+                viewModel.ProductCategories = catagoryContext.GetAll();
                 return View(viewModel);
             }
         }

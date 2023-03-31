@@ -11,16 +11,16 @@ namespace MyShop.WebUI.Controllers
     public class ProductCategoryManagerController : Controller
     {
         //cache service 
-        ProductCategoryRepository context;
+        InMemoryRepository<ProductCategory> context;
 
         public ProductCategoryManagerController()
         {
             //create cache when called 
-            context = new ProductCategoryRepository();
+            context = new InMemoryRepository<ProductCategory>();
         }
         public ActionResult Index()
         {
-            List<ProductCategory> productsCategory = context.GetAllproductsCategory().ToList();
+            List<ProductCategory> productsCategory = context.GetAll().ToList();
             return View(productsCategory);
         }
         //Display the page 

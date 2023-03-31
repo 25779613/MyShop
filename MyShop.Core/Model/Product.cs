@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace MyShop.Core.Model
 {
-    public class Product
+    public class Product : BaseEntity
     {
-        [Key]
-        public string Id { get; set; }
+        
+       // public string Id { get; set; } inherits Id from BaseEntity
         [StringLength(20)]
         [DisplayName("Product Name")]
         public string Name { get; set; }
