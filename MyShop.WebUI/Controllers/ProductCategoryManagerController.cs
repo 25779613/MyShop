@@ -1,4 +1,5 @@
-﻿using MyShop.Core.Model;
+﻿using MyShop.Core.Contracts;
+using MyShop.Core.Model;
 using MyShop.DataAccess.InMemory;
 using System;
 using System.Collections.Generic;
@@ -10,13 +11,22 @@ namespace MyShop.WebUI.Controllers
 {
     public class ProductCategoryManagerController : Controller
     {
-        //cache service 
-        InMemoryRepository<ProductCategory> context;
+        //generic cache service 
+        //InMemoryRepository<ProductCategory> context;
 
-        public ProductCategoryManagerController()
+        //switching to interface so that it can use SQL/InMemory
+        IRepository<ProductCategory> context;
+
+        //public ProductCategoryManagerController()
+        //{
+        //    //create cache when called 
+        //    context = new InMemoryRepository<ProductCategory>();
+        //}
+
+        //updating constructor to take in inteface as param, gets input from unity.config
+        public ProductCategoryManagerController(IRepository<ProductCategory> catagoryContext)
         {
-            //create cache when called 
-            context = new InMemoryRepository<ProductCategory>();
+            context = catagoryContext;
         }
         public ActionResult Index()
         {

@@ -1,4 +1,5 @@
-﻿using MyShop.Core.Model;
+﻿using MyShop.Core.Contracts;
+using MyShop.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MyShop.DataAccess.InMemory
 {
-    public class InMemoryRepository <T> where T : BaseEntity // only accept T if it is a base entity , Base entity is a base class that contains an Id , other models must extend base Entity
+    public class InMemoryRepository<T> : IRepository<T> where T : BaseEntity // only accept T if it is a base entity , Base entity is a base class that contains an Id , other models must extend base Entity
     {
         ObjectCache cache = MemoryCache.Default;
         List<T> items;
@@ -19,7 +20,7 @@ namespace MyShop.DataAccess.InMemory
             className = typeof(T).Name;
             items = cache[className] as List<T>;
 
-            if(items ==null)
+            if (items == null)
             {
                 items = new List<T>();
             }
@@ -32,7 +33,7 @@ namespace MyShop.DataAccess.InMemory
 
         public void Insert(T t)
         {
-            if(String.IsNullOrEmpty(t.Id))
+            if (String.IsNullOrEmpty(t.Id))
             {
                 t.Id = Guid.NewGuid().ToString();
             }
@@ -42,7 +43,7 @@ namespace MyShop.DataAccess.InMemory
         {
             T tToUpdate = items.Find(i => i.Id == t.Id);
 
-            if(tToUpdate != null)
+            if (tToUpdate != null)
             {
                 tToUpdate = t;
             }
@@ -55,7 +56,7 @@ namespace MyShop.DataAccess.InMemory
         public T Find(string iD)
         {
             T t = items.Find(i => i.Id == iD);
-            if(t != null)
+            if (t != null)
             {
                 return t;
             }
@@ -72,14 +73,14 @@ namespace MyShop.DataAccess.InMemory
 
         public void Delete(string iD)
         {
-            T tToDelete = items.Find(p=> p.Id  == iD);
+            T tToDelete = items.Find(p => p.Id == iD);
 
-            if(tToDelete != null)
+            if (tToDelete != null)
             {
                 items.Remove(tToDelete);
             }
             else
-            { 
+            {
                 throw new Exception(className + " not found");
             }
         }
