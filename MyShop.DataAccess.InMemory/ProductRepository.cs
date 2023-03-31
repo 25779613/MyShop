@@ -25,7 +25,7 @@ namespace MyShop.DataAccess.InMemory
             sam.Name = "sam";
             sam.Price = 020;
             sam.Description = "bla";
-            sam.Category = "kaka";
+          
             Insert(sam);
             Commit();
             }
