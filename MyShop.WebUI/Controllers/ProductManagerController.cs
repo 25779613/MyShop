@@ -26,7 +26,7 @@ namespace MyShop.WebUI.Controllers
         //    catagoryContext = new InMemoryRepository<ProductCategory>();
         //}
         
-        //update the constructor to take in the interface, gains input from unity.config
+        //update the constructor to take in the interface, gains input from unity.config which is in app start folder
         public ProductManagerController(IRepository<Product> productContext, IRepository<ProductCategory> productCategoryContext)
         {
             //create cache when called 
