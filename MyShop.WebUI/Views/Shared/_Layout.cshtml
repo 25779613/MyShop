@@ -24,6 +24,11 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
                  @Html.Partial("_LoginPartial")
+                @* Rendering the Basket *@
+                @{ 
+                    Html.RenderAction("BasketSummary", "Basket");
+                }
+
             </div>
         </div>
     </nav>
